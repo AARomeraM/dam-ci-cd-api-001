@@ -21,5 +21,10 @@ jobs:
           java-version: "17"
           cache: maven
 
-      - name: Compilar y ejecutar tests con Maven Wrapper
-        run: ./mvnw -B clean test
+      - name: Corregir mvnw
+        run: |
+          sed -i 's/\r$//' mvnw
+          chmod +x mvnw
+
+      - name: Compilar y ejecutar tests con Maven
+        run: bash mvnw -B clean test
